@@ -5,12 +5,12 @@
   "description": "A website starter pack that creates prefilled html, css and js files with just one click. After installation, open your context menu and click on 'New Website Project...' and input your project name and Voila!!, you're project files are ready.",
   "readme": "README.md",
   "license": "MIT",
-  "icon": "/images/extn-icon.png",
+  "icon": "images/extn-icon.png",
   "repository": {
     "type": "git",
     "url": "https://github.com/theSaiRohit/website-starter-extn"
   },
-  "version": "0.0.2",
+  "version": "0.0.3",
   "engines": {
     "vscode": "^1.90.0"
   },
