@@ -17,6 +17,6 @@ An updated VS Code is all you need!
 
 ## Rating
 
-If you found this extension useful, I'd really appreciate it if you could rete this extension as per your liking! :)
+If you found this extension useful, I'd really appreciate it if you could rate this extension as per your liking! :)
 
 **Enjoy!**
