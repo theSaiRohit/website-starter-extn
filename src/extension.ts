@@ -4,27 +4,17 @@ import * as path from "path";
 
 export function activate(context: vscode.ExtensionContext) {
   let disposable = vscode.commands.registerCommand("website-starter-pack.newProject", async (uri: vscode.Uri) => {
-    const ProjectName = await vscode.window.showInputBox({
-      placeHolder: "Enter Project Name"
-    });
-    if (!ProjectName) {
-      vscode.window.showErrorMessage("Project Name is mandatory");
-      return;
-    }
-
-    const selectedFolderPath = uri.fsPath;
-    const ProjectPath = path.join(selectedFolderPath, ProjectName);
-    await fs.mkdir(ProjectPath);
+    let projectName = "Document";
 
     const ProjectFiles = [
       {
         fileName: "index.html",
         code: `<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>${ProjectName}</title>
+        <html lang="en">
+        <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>${projectName}</title>
     <link rel="stylesheet" href="style.css" />
   </head>
   <body>
@@ -51,12 +41,32 @@ export function activate(context: vscode.ExtensionContext) {
 `
       }
     ];
+    const optionItems = ["Use same folder (directory)", "Create new folder (directory)"];
+    const options = await vscode.window.showQuickPick(optionItems, {
+      title: "Select where to create your website project :"
+    });
 
-    for (const file of ProjectFiles) {
-      fs.writeFile(path.join(ProjectPath, file.fileName), file.code);
+    if (options?.includes(optionItems[0])) {
+      for (const file of ProjectFiles) {
+        fs.writeFile(path.join(uri.fsPath, file.fileName), file.code);
+      }
+      vscode.window.showInformationMessage("Successfully created all three files in same directory");
+    } else {
+      projectName = (await vscode.window.showInputBox({
+        placeHolder: "Enter Project Name"
+      })) as string;
+      if (!projectName) {
+        vscode.window.showErrorMessage("Project Name is mandatory");
+        return;
+      }
+      const selectedFolderPath = uri.fsPath;
+      const projectPath = path.join(selectedFolderPath, projectName);
+      await fs.mkdir(projectPath);
+      for (const file of ProjectFiles) {
+        fs.writeFile(path.join(projectPath, file.fileName), file.code);
+      }
+      vscode.window.showInformationMessage(`Project '${projectName}' created successfully.`);
     }
-
-    vscode.window.showInformationMessage(`Project '${ProjectName}' created successfully.`);
   });
 
   context.subscriptions.push(disposable);
