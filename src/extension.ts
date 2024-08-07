@@ -10,19 +10,18 @@ export function activate(context: vscode.ExtensionContext) {
       {
         fileName: "index.html",
         code: `<!DOCTYPE html>
-        <html lang="en">
-        <head>
-        <meta charset="UTF-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>${projectName}</title>
-    <link rel="stylesheet" href="style.css" />
-  </head>
-  <body>
-    <!-- write html here -->
-    <script src="script.js"></script>
-  </body>
-</html>
-`
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="./style.css">
+    <script src="./script.js" async defer></script>
+</head>
+<body>
+    
+</body>
+</html>`
       },
       {
         fileName: "style.css",
